@@ -5,15 +5,23 @@ class Button extends StatelessWidget {
   final VoidCallback? onPress;
   final String text;
   final bool haveBg;
-  const Button(
-      {super.key, this.onPress, required this.text, required this.haveBg});
+  final bool isLarge;
+
+  const Button({
+    super.key,
+    this.onPress,
+    required this.text,
+    required this.haveBg,
+    this.isLarge = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        width: MediaQuery.of(context).size.width / 2.4,
+        width:
+            isLarge ? double.infinity : MediaQuery.of(context).size.width / 2.4,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
         decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:password_manager/models/on_board.dart';
+import 'package:password_manager/screens/register.dart';
 import 'package:password_manager/widgets/button.dart';
 import 'package:password_manager/widgets/onBoardContent.dart';
 import 'package:password_manager/widgets/onBoardIndicator.dart';
@@ -133,14 +134,20 @@ class _OnboardingState extends State<Onboarding> {
               const SizedBox(
                 height: 30,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Button(
-                    haveBg: false,
-                    text: "REGISTER",
-                  ),
-                  Button(
+                      haveBg: false,
+                      text: "REGISTER",
+                      onPress: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const Register(),
+                          ),
+                        );
+                      }),
+                  const Button(
                     haveBg: true,
                     text: "LOGIN",
                   ),
