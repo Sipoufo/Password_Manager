@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/screens/Home.dart';
 import 'package:password_manager/screens/forgetPassword.dart';
 import 'package:password_manager/screens/register.dart';
 import 'package:password_manager/utils/colors.dart';
@@ -129,10 +130,17 @@ class _LoginState extends State<Login> {
                     const SizedBox(
                       height: 30,
                     ),
-                    const Button(
+                    Button(
                       text: "LOGIN",
                       haveBg: true,
                       isLarge: true,
+                      onPress: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/screens/Home.dart';
 import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';
@@ -109,10 +110,17 @@ class _RegisterState extends State<Register> {
                     const SizedBox(
                       height: 22,
                     ),
-                    const Button(
+                    Button(
                       text: "REGISTER",
                       haveBg: true,
                       isLarge: true,
+                      onPress: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const Home(),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),
