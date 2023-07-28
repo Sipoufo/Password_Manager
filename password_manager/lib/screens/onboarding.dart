@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:password_manager/models/on_board.dart';
+import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/screens/register.dart';
 import 'package:password_manager/widgets/button.dart';
 import 'package:password_manager/widgets/onBoardContent.dart';
@@ -147,9 +148,16 @@ class _OnboardingState extends State<Onboarding> {
                           ),
                         );
                       }),
-                  const Button(
+                  Button(
                     haveBg: true,
                     text: "LOGIN",
+                    onPress: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               )

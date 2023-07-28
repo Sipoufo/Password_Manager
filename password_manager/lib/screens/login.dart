@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:password_manager/screens/login.dart';
+import 'package:password_manager/screens/register.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';
 import 'package:password_manager/widgets/input.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
-  late String _name;
+class _LoginState extends State<Login> {
   late String _email;
   late String _password;
 
@@ -53,7 +52,7 @@ class _RegisterState extends State<Register> {
                     Container(
                       alignment: Alignment.topLeft,
                       child: const Text(
-                        "REGISTER",
+                        "LOGIN",
                         style: TextStyle(
                           fontFamily: "BebasNeue",
                           fontSize: 60,
@@ -63,7 +62,7 @@ class _RegisterState extends State<Register> {
                     Container(
                       alignment: Alignment.topLeft,
                       child: const Text(
-                        "Let’s get you setup with a new account!",
+                        "Let’s get you setup with your account!",
                         style: TextStyle(
                           fontSize: 12,
                           color: NeutralGray,
@@ -77,13 +76,6 @@ class _RegisterState extends State<Register> {
                 ),
                 Column(
                   children: [
-                    Input(
-                      label: "Name",
-                      placeholder: "xxxx",
-                      onChange: (value) {
-                        _name = value;
-                      },
-                    ),
                     const SizedBox(
                       height: 18,
                     ),
@@ -105,10 +97,29 @@ class _RegisterState extends State<Register> {
                       },
                     ),
                     const SizedBox(
-                      height: 22,
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const Register(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Forgot Password",
+                        style: TextStyle(
+                          color: Primary,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
                     ),
                     const Button(
-                      text: "REGISTER",
+                      text: "LOGIN",
                       haveBg: true,
                       isLarge: true,
                     )
@@ -120,7 +131,7 @@ class _RegisterState extends State<Register> {
                 Column(
                   children: [
                     const Text(
-                      "Already have an account?",
+                      "Don’t have an account yet?",
                       style: TextStyle(color: NeutralDark),
                     ),
                     const SizedBox(
@@ -130,19 +141,19 @@ class _RegisterState extends State<Register> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Login(),
+                            builder: (context) => const Register(),
                           ),
                         );
                       },
                       child: const Text(
-                        "LOGIN",
+                        "REGISTER",
                         style: TextStyle(
                           color: Primary,
                           fontFamily: "BebasNeue",
                           fontSize: 18,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 )
               ],
