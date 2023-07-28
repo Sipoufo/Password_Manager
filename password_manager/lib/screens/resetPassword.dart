@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';
 import 'package:password_manager/widgets/input.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class ResetPassword extends StatefulWidget {
+  const ResetPassword({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<ResetPassword> createState() => _ResetPasswordState();
 }
 
-class _RegisterState extends State<Register> {
-  late String _name;
-  late String _email;
+class _ResetPasswordState extends State<ResetPassword> {
   late String _password;
 
   @override
@@ -53,7 +50,7 @@ class _RegisterState extends State<Register> {
                     Container(
                       alignment: Alignment.topLeft,
                       child: const Text(
-                        "REGISTER",
+                        "RESET PASSWORD",
                         style: TextStyle(
                           fontFamily: "BebasNeue",
                           fontSize: 64,
@@ -61,45 +58,18 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        "Let’s get you setup with a new account!",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: NeutralGray,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Column(
                   children: [
-                    Input(
-                      label: "Name",
-                      placeholder: "xxxx",
-                      onChange: (value) {
-                        _name = value;
-                      },
-                    ),
                     const SizedBox(
                       height: 18,
                     ),
                     Input(
-                      label: "Email",
-                      placeholder: "xxx@xxx.xxx",
-                      onChange: (value) {
-                        _email = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    Input(
-                      label: "Password",
+                      label: "NEW PASSWORD",
                       placeholder: "Password",
                       onChange: (value) {
                         _password = value;
@@ -107,10 +77,10 @@ class _RegisterState extends State<Register> {
                       isPassword: true,
                     ),
                     const SizedBox(
-                      height: 22,
+                      height: 30,
                     ),
                     const Button(
-                      text: "REGISTER",
+                      text: "RESET",
                       haveBg: true,
                       isLarge: true,
                     )
@@ -119,34 +89,6 @@ class _RegisterState extends State<Register> {
                 const SizedBox(
                   height: 40,
                 ),
-                Column(
-                  children: [
-                    const Text(
-                      "Already have an account?",
-                      style: TextStyle(color: NeutralDark),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const Login(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "LOGIN",
-                        style: TextStyle(
-                          color: Primary,
-                          fontFamily: "BebasNeue",
-                          fontSize: 18,
-                        ),
-                      ),
-                    )
-                  ],
-                )
               ],
             ),
           ),
