@@ -56,7 +56,8 @@ class _RegisterState extends State<Register> {
                         "REGISTER",
                         style: TextStyle(
                           fontFamily: "BebasNeue",
-                          fontSize: 60,
+                          fontSize: 64,
+                          color: NeutralDark,
                         ),
                       ),
                     ),

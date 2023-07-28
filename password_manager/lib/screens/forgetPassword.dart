@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:password_manager/screens/forgetPassword.dart';
-import 'package:password_manager/screens/register.dart';
+import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';
 import 'package:password_manager/widgets/input.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<ForgetPassword> createState() => _ForgetPasswordState();
 }
 
-class _LoginState extends State<Login> {
+class _ForgetPasswordState extends State<ForgetPassword> {
   late String _email;
-  late String _password;
 
   @override
   Widget build(BuildContext context) {
@@ -53,21 +51,11 @@ class _LoginState extends State<Login> {
                     Container(
                       alignment: Alignment.topLeft,
                       child: const Text(
-                        "LOGIN",
+                        "FORGOT PASSWORD",
                         style: TextStyle(
                           fontFamily: "BebasNeue",
                           fontSize: 64,
                           color: NeutralDark,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        "Let’s get you setup with your account!",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: NeutralGray,
                         ),
                       ),
                     ),
@@ -91,46 +79,11 @@ class _LoginState extends State<Login> {
                     const SizedBox(
                       height: 18,
                     ),
-                    Input(
-                      label: "Password",
-                      placeholder: "Password",
-                      onChange: (value) {
-                        _password = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const Register(),
-                          ),
-                        );
-                      },
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const ForgetPassword(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          "Forgot Password",
-                          style: TextStyle(
-                            color: Primary,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ),
                     const SizedBox(
                       height: 30,
                     ),
                     const Button(
-                      text: "LOGIN",
+                      text: "SUBMIT",
                       haveBg: true,
                       isLarge: true,
                     )
@@ -142,7 +95,7 @@ class _LoginState extends State<Login> {
                 Column(
                   children: [
                     const Text(
-                      "Don’t have an account yet?",
+                      "Do you remember your password?",
                       style: TextStyle(color: NeutralDark),
                     ),
                     const SizedBox(
@@ -152,12 +105,12 @@ class _LoginState extends State<Login> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const Register(),
+                            builder: (context) => const Login(),
                           ),
                         );
                       },
                       child: const Text(
-                        "REGISTER",
+                        "LOGIN",
                         style: TextStyle(
                           color: Primary,
                           fontFamily: "BebasNeue",
