@@ -24,9 +24,9 @@ class Button extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 16,
-            color: haveBg ? Colors.white : Primary,
-          ),
+              fontSize: 18,
+              color: haveBg ? Colors.white : Primary,
+              fontFamily: 'BebasNeue'),
         ),
       ),
     );

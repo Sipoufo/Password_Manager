@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:password_manager/models/on_board.dart';
 import 'package:password_manager/widgets/button.dart';
 import 'package:password_manager/widgets/onBoardContent.dart';
+import 'package:password_manager/widgets/onBoardIndicator.dart';
 
-final List<OnBoard> demoData = [
+final List<OnBoard> onboardData = [
   OnBoard(
     title: "Generate Secure Passwords.",
     description:
@@ -96,7 +97,42 @@ class _OnboardingState extends State<Onboarding> {
                   ),
                 ),
               ),
-              OnBoardContent(title: "title", description: "description"),
+              Expanded(
+                child: PageView.builder(
+                  onPageChanged: (index) {
+                    setState(() {
+                      _pageIndex = index;
+                    });
+                  },
+                  itemCount: onboardData.length,
+                  itemBuilder: (context, index) => OnBoardContent(
+                    title: onboardData[index].title,
+                    description: onboardData[index].description,
+                  ),
+                ),
+              ),
+              // const OnBoardContent(
+              //   title: "GENERATE SECURE PASSWORD.",
+              //   description:
+              //       "Stop using unsecure passwords for your online accounts, level up with OnePass. Get the most secure and difficult-to-crack passwords.",
+              // ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ...List.generate(
+                    onboardData.length,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OnBoardIndicator(
+                          letter: "${index + 1}",
+                          isActive: index == _pageIndex),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

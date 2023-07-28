@@ -12,19 +12,23 @@ class OnBoardContent extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             width: double.infinity,
             child: Text(
               title,
-              style: const TextStyle(fontSize: 40, color: NeutralDark),
+              style: const TextStyle(
+                  fontSize: 56,
+                  color: NeutralDark,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
             width: double.infinity,
             child: Text(
               description,
-              style: const TextStyle(fontSize: 10, color: NeutralGray),
+              style: const TextStyle(fontSize: 12, color: NeutralGray),
             ),
           ),
         ],
