@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/screens/emailSend.dart';
 import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';
@@ -62,7 +63,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ],
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Column(
                   children: [
@@ -77,15 +78,19 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       },
                     ),
                     const SizedBox(
-                      height: 18,
-                    ),
-                    const SizedBox(
                       height: 30,
                     ),
-                    const Button(
+                    Button(
                       text: "SUBMIT",
                       haveBg: true,
                       isLarge: true,
+                      onPress: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const EmailSend(),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),

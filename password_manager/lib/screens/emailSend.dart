@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/utils/colors.dart';
+import 'package:password_manager/widgets/button.dart';
 
 class EmailSend extends StatefulWidget {
   const EmailSend({super.key});
@@ -55,65 +57,28 @@ class _EmailSendState extends State<EmailSend> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
                 Column(
                   children: [
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    Input(
-                      label: "Email",
-                      placeholder: "xxx@xxx.xxx",
-                      onChange: (value) {
-                        _email = value;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 18,
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: const Text(
+                        "The link to reset your password has been sent to your email. Check your email to reset your password.",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: NeutralGray,
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                     const Button(
-                      text: "SUBMIT",
+                      text: "RESEND",
                       haveBg: true,
                       isLarge: true,
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Column(
-                  children: [
-                    const Text(
-                      "Do you remember your password?",
-                      style: TextStyle(color: NeutralDark),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const Login(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "LOGIN",
-                        style: TextStyle(
-                          color: Primary,
-                          fontFamily: "BebasNeue",
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),
