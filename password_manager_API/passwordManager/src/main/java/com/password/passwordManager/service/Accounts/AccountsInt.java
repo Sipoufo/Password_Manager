@@ -5,9 +5,9 @@ import com.password.passwordManager.model.Accounts;
 import java.util.List;
 
 public interface AccountsInt {
-    public Accounts saveUser(Accounts account);
-    public Accounts fetchUser(String idAccount);
-    public List<Accounts> fetchAllUsers();
-    public Accounts updateUser(Accounts account);
-    public boolean deleteUser(String idAccount);
+    public Accounts saveAccount(Accounts account);
+    public Accounts fetchAccount(String idAccount);
+    public List<Accounts> fetchAllAccounts();
+    public Accounts updateAccount(String idAccount, Accounts account);
+    public boolean deleteAccount(String idAccount);
 }

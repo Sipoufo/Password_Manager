@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/password
+      database: password
+bezkoder:
+  app:
+    jwtSecret: PasswordManagerSipoufo2023
+    jwtExpirationMs: 86400000
