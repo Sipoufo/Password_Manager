@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:password_manager/screens/Home.dart';
+import 'package:password_manager/screens/home.dart';
 import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';

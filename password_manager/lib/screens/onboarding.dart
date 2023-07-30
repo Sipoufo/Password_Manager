@@ -138,7 +138,8 @@ class _OnboardingState extends State<Onboarding> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Button(
+                  Expanded(
+                    child: Button(
                       haveBg: false,
                       text: "REGISTER",
                       onPress: () {
@@ -147,17 +148,26 @@ class _OnboardingState extends State<Onboarding> {
                             builder: (context) => const Register(),
                           ),
                         );
-                      }),
-                  Button(
-                    haveBg: true,
-                    text: "LOGIN",
-                    onPress: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const Login(),
-                        ),
-                      );
-                    },
+                      },
+                      isLarge: true,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Button(
+                      haveBg: true,
+                      text: "LOGIN",
+                      onPress: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const Login(),
+                          ),
+                        );
+                      },
+                      isLarge: true,
+                    ),
                   ),
                 ],
               )

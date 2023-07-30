@@ -1,4 +1,4 @@
-package com.password.password_manager;
+package com.password.passwordManager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

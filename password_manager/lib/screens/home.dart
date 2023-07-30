@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/screens/addNewPassword.dart';
+import 'package:password_manager/screens/passwordCardDetail.dart';
+import 'package:password_manager/screens/profile.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/passwordCard.dart';
 
@@ -73,7 +76,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         const SizedBox(
-                          width: 50,
+                          width: 60,
                         ),
                         Expanded(
                           child: Container(
@@ -109,82 +112,86 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 20,
                 ),
-                const TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: NeutralGray,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
                         color: NeutralGray,
-                        width: 2,
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(14),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: NeutralGray,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(14),
+                        ),
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: NeutralGray,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(14),
+                        ),
+                      ),
+                      hintText: 'Search Websites...',
+                      hintStyle: const TextStyle(color: NeutralGray),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: NeutralGray,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(14),
-                      ),
-                    ),
-                    hintText: 'Search Websites...',
-                    hintStyle: const TextStyle(color: NeutralGray),
                   ),
                 ),
                 Expanded(
-                  // child: ListView.builder(
-                  //   itemCount: 4,
-                  //   itemBuilder: (context, index) {
-                  //     return const PasswordCard(
-                  //       name: "Facebook",
-                  //       password: "facebook",
-                  //     );
-                  //   },
-                  // ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 130,
-                        height: 130,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/Search.png"),
-                            alignment: Alignment.topCenter,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      const Text(
-                        "NO RESULTS",
-                        style: TextStyle(
-                          color: NeutralDark,
-                          fontFamily: "BebasNeue",
-                          fontSize: 24,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "We couldn’t find anything. Try searching for something else.",
-                        style: TextStyle(
-                          color: NeutralGray,
-                          fontSize: 16,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                  child: ListView.builder(
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      return const PasswordCard(
+                        name: "Facebook",
+                        password: "facebook",
+                        passwordCardDetail: PasswordCardDetail(),
+                      );
+                    },
                   ),
+                  // child: Column(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Container(
+                  //       width: 130,
+                  //       height: 130,
+                  //       decoration: const BoxDecoration(
+                  //         image: DecorationImage(
+                  //           image: AssetImage("assets/images/Search.png"),
+                  //           alignment: Alignment.topCenter,
+                  //           fit: BoxFit.contain,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     const SizedBox(
+                  //       height: 30,
+                  //     ),
+                  //     const Text(
+                  //       "NO RESULTS",
+                  //       style: TextStyle(
+                  //         color: NeutralDark,
+                  //         fontFamily: "BebasNeue",
+                  //         fontSize: 24,
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       height: 20,
+                  //     ),
+                  //     const Text(
+                  //       "We couldn’t find anything. Try searching for something else.",
+                  //       style: TextStyle(
+                  //         color: NeutralGray,
+                  //         fontSize: 16,
+                  //       ),
+                  //       textAlign: TextAlign.center,
+                  //     ),
+                  //   ],
+                  // ),
                 )
               ],
             ),
@@ -240,6 +247,13 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => const Profile(),
+                                    ),
+                                  );
+                                },
                                 child: const Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -263,14 +277,21 @@ class _HomeState extends State<Home> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const AddNewPassword(),
+                        ),
+                      );
+                    },
                     child: Container(
                       padding: EdgeInsets.all(20),
                       decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(40),
-                          ),
-                          color: Primary),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(40),
+                        ),
+                        color: Primary,
+                      ),
                       child: const Icon(
                         Icons.add,
                         size: 30,

@@ -21,8 +21,9 @@ class Button extends StatelessWidget {
       onTap: onPress,
       child: Container(
         width:
-            isLarge ? double.infinity : MediaQuery.of(context).size.width / 2.4,
+            isLarge ? double.infinity : MediaQuery.of(context).size.width / 2.3,
         alignment: Alignment.center,
+        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
         decoration: BoxDecoration(
           color: haveBg ? Primary : Colors.white,

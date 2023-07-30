@@ -6,12 +6,14 @@ class Input extends StatelessWidget {
   final String placeholder;
   final Function onChange;
   final bool isPassword;
+  final bool isEnable;
   const Input({
     super.key,
     required this.label,
     required this.placeholder,
     required this.onChange,
     this.isPassword = false,
+    this.isEnable = true,
   });
 
   @override
@@ -28,13 +30,15 @@ class Input extends StatelessWidget {
         TextField(
           scrollPadding: EdgeInsets.symmetric(
               vertical: MediaQuery.of(context).viewInsets.bottom),
+          enabled: isEnable,
+          // keyboardType: TextInputType.datetime,
           obscureText: isPassword ? true : false,
           decoration: InputDecoration(
             hintText: placeholder,
             hintStyle: const TextStyle(color: NeutralGray),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-                color: NeutralGray,
+                color: Neutral,
                 width: 2,
               ),
               borderRadius: BorderRadius.all(
