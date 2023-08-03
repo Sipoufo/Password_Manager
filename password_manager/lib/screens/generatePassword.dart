@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:password_manager/controllers/password.dart';
 import 'package:password_manager/utils/colors.dart';
 import 'package:password_manager/widgets/button.dart';
-import 'package:password_manager/widgets/input.dart';
+import 'package:password_manager/widgets/inputNumber.dart';
 
 class GeneratePassword extends StatefulWidget {
   const GeneratePassword({super.key});
@@ -11,6 +13,23 @@ class GeneratePassword extends StatefulWidget {
 }
 
 class _GeneratePasswordState extends State<GeneratePassword> {
+  String passwordResult = "";
+  int passwordLength = 4;
+  int symbols = 2;
+  Password password = Password();
+
+  @override
+  void initState() {
+    _generatePassword();
+    super.initState();
+  }
+
+  _generatePassword() {
+    setState(() {
+      passwordResult = password.generatePassword(passwordLength, symbols);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,26 +72,52 @@ class _GeneratePasswordState extends State<GeneratePassword> {
                     const SizedBox(
                       height: 30,
                     ),
-                    Input(
-                      label: "",
-                      placeholder: "",
-                      onChange: (value) {},
+                    Container(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 14),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(14),
+                        ),
+                        border: Border.all(
+                          width: 2,
+                          color: Neutral,
+                        ),
+                      ),
+                      child: Text(
+                        passwordResult,
+                        style:
+                            const TextStyle(color: NeutralDark, fontSize: 20),
+                      ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
-                    Input(
+                    InputNumber(
                       label: "PASSWORD LENGTH",
                       placeholder: "Website/App Name",
-                      onChange: (value) {},
+                      defaultValue: "$passwordLength",
+                      onChange: (value) {
+                        setState(() {
+                          passwordLength = int.parse(value);
+                        });
+                      },
                     ),
                     const SizedBox(
                       height: 30,
                     ),
-                    Input(
-                      label: "INCLUDE SYMBOLS",
+                    InputNumber(
+                      label: "SYMBOLS LENGTH",
                       placeholder: "Website/App Link",
-                      onChange: (value) {},
+                      defaultValue: "$symbols",
+                      onChange: (value) {
+                        print(value);
+                        setState(() {
+                          symbols = int.parse(value);
+                        });
+                      },
                     ),
                     const SizedBox(
                       height: 30,
@@ -82,16 +127,23 @@ class _GeneratePasswordState extends State<GeneratePassword> {
                       children: [
                         Container(
                           alignment: Alignment.topRight,
-                          child: const Button(
+                          child: Button(
                             text: "RANDOMIZE",
                             haveBg: false,
+                            onPress: () {
+                              _generatePassword();
+                            },
                           ),
                         ),
                         Container(
                           alignment: Alignment.topRight,
-                          child: const Button(
+                          child: Button(
                             text: "COPY",
                             haveBg: true,
+                            onPress: () {
+                              Clipboard.setData(
+                                  ClipboardData(text: passwordResult));
+                            },
                           ),
                         ),
                       ],

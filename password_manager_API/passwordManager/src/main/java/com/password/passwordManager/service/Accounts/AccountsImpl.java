@@ -40,8 +40,9 @@ public class AccountsImpl implements AccountsInt{
             return null;
         }
 
-        accounts.setDate(account.getDate());
+        accounts.setUsername(account.getUsername());
         accounts.setLink(account.getLink());
+        accounts.setName(account.getName());
         accounts.setPassword(account.getPassword());
 
         return accountRepository.save(accounts);

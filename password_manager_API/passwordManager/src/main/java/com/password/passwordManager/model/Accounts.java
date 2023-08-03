@@ -15,7 +15,8 @@ import java.util.Date;
 public class Accounts {
     @Id
     private String id;
+    private String name;
     private String link;
+    private String username;
     private String password;
-    private Date date;
 }

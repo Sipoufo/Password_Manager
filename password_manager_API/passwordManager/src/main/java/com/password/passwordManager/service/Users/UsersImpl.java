@@ -2,6 +2,7 @@ package com.password.passwordManager.service.Users;
 
 import com.password.passwordManager.model.Accounts;
 import com.password.passwordManager.model.Users;
+import com.password.passwordManager.repository.AccountRepository;
 import com.password.passwordManager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import java.util.List;
 public class UsersImpl implements UsersInt {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Override
     public Users saveUser(Users user) {
@@ -40,10 +43,10 @@ public class UsersImpl implements UsersInt {
             return null;
         }
 
-        user1.setEmail(user.getEmail());
-        user1.setName(user.getName());
-        user1.setPicture(user.getPicture());
-        user1.setPassword(user.getPassword());
+        user1.setEmail(user.getEmail() == null ? user1.getEmail() : user.getEmail());
+        user1.setName(user.getName() == null ? user1.getName() : user.getName());
+        user1.setPicture(user.getPicture() == null ? user1.getPicture() : user.getPicture());
+        user1.setAccounts(user.getAccounts() == null ? user1.getAccounts() : user.getAccounts());
 
         return userRepository.save(user1);
     }
@@ -60,5 +63,33 @@ public class UsersImpl implements UsersInt {
 
     public Users fetchByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Users createNewAccount(String idUser, Accounts account) {
+        Accounts account1 = accountRepository.save(account);
+
+        Users user = userRepository.findById(idUser).get();
+
+        List<Accounts> accounts =  user.getAccounts();
+        accounts.add(account1);
+
+        user.setAccounts(accounts);
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public boolean deleteAccount(String idUser, String idAccount) {
+        accountRepository.deleteById(idAccount);
+
+        Users user = userRepository.findById(idUser).get();
+
+        Accounts account = accountRepository.findById(idAccount).get();
+
+        List<Accounts> accounts =  user.getAccounts();
+        accounts.remove(account);
+
+        return true;
     }
 }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/controllers/user_controller.dart';
+import 'package:password_manager/models/account.dart';
+import 'package:password_manager/models/message.dart';
+import 'package:password_manager/models/user.dart';
 import 'package:password_manager/screens/addNewPassword.dart';
+import 'package:password_manager/screens/login.dart';
 import 'package:password_manager/screens/passwordCardDetail.dart';
 import 'package:password_manager/screens/profile.dart';
 import 'package:password_manager/utils/colors.dart';
@@ -13,6 +18,30 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late UserController userController;
+  bool isLoading = true;
+  late User user;
+
+  @override
+  void initState() {
+    print("OK");
+    userController = UserController();
+    super.initState();
+    isLoading = true;
+    _getUserDetail();
+    isLoading = false;
+  }
+
+  _getUserDetail() async {
+    print("OK 22");
+    Message message = await userController.getUserController();
+    print("OK 23");
+    print(message);
+    setState(() {
+      user = message.data!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,17 +87,19 @@ class _HomeState extends State<Home> {
                                 Radius.circular(10),
                               ),
                             ),
-                            child: const Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "5",
-                                  style: TextStyle(
+                                  isLoading == true
+                                      ? "0"
+                                      : "${user.accounts.length}",
+                                  style: const TextStyle(
                                       fontSize: 70,
                                       color: Primary,
                                       fontFamily: "BebasNeue"),
                                 ),
-                                Text(
+                                const Text(
                                   "Passwords Stored",
                                 )
                               ],
@@ -88,17 +119,17 @@ class _HomeState extends State<Home> {
                                 Radius.circular(10),
                               ),
                             ),
-                            child: const Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "0",
-                                  style: TextStyle(
+                                  isLoading ? "0" : "0",
+                                  style: const TextStyle(
                                       fontSize: 70,
                                       color: Primary,
                                       fontFamily: "BebasNeue"),
                                 ),
-                                Text(
+                                const Text(
                                   "Passwords Compromised",
                                 )
                               ],
@@ -144,55 +175,71 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return const PasswordCard(
-                        name: "Facebook",
-                        password: "facebook",
-                        passwordCardDetail: PasswordCardDetail(),
-                      );
-                    },
-                  ),
-                  // child: Column(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     Container(
-                  //       width: 130,
-                  //       height: 130,
-                  //       decoration: const BoxDecoration(
-                  //         image: DecorationImage(
-                  //           image: AssetImage("assets/images/Search.png"),
-                  //           alignment: Alignment.topCenter,
-                  //           fit: BoxFit.contain,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     const SizedBox(
-                  //       height: 30,
-                  //     ),
-                  //     const Text(
-                  //       "NO RESULTS",
-                  //       style: TextStyle(
-                  //         color: NeutralDark,
-                  //         fontFamily: "BebasNeue",
-                  //         fontSize: 24,
-                  //       ),
-                  //     ),
-                  //     SizedBox(
-                  //       height: 20,
-                  //     ),
-                  //     const Text(
-                  //       "We couldn’t find anything. Try searching for something else.",
-                  //       style: TextStyle(
-                  //         color: NeutralGray,
-                  //         fontSize: 16,
-                  //       ),
-                  //       textAlign: TextAlign.center,
-                  //     ),
-                  //   ],
-                  // ),
-                )
+                    child: isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : RefreshIndicator(
+                            onRefresh: () {
+                              return userController
+                                  .getUserController()
+                                  .then((value) => setState(() {
+                                        user = value.data!;
+                                      }));
+                            },
+                            child: ListView.builder(
+                              itemCount:
+                                  isLoading == true ? 0 : user.accounts.length,
+                              itemBuilder: (context, index) {
+                                return PasswordCard(
+                                  name: user.accounts[index].name,
+                                  password: user.accounts[index].password,
+                                  passwordCardDetail: PasswordCardDetail(
+                                    account: user.accounts[index],
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                    // child: Column(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Container(
+                    //       width: 130,
+                    //       height: 130,
+                    //       decoration: const BoxDecoration(
+                    //         image: DecorationImage(
+                    //           image: AssetImage("assets/images/Search.png"),
+                    //           alignment: Alignment.topCenter,
+                    //           fit: BoxFit.contain,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       height: 30,
+                    //     ),
+                    //     const Text(
+                    //       "NO RESULTS",
+                    //       style: TextStyle(
+                    //         color: NeutralDark,
+                    //         fontFamily: "BebasNeue",
+                    //         fontSize: 24,
+                    //       ),
+                    //     ),
+                    //     SizedBox(
+                    //       height: 20,
+                    //     ),
+                    //     const Text(
+                    //       "We couldn’t find anything. Try searching for something else.",
+                    //       style: TextStyle(
+                    //         color: NeutralGray,
+                    //         fontSize: 16,
+                    //       ),
+                    //       textAlign: TextAlign.center,
+                    //     ),
+                    //   ],
+                    // ),
+                    )
               ],
             ),
           ),

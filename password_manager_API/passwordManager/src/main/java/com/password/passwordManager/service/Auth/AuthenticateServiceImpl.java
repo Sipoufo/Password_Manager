@@ -32,8 +32,10 @@ public class AuthenticateServiceImpl implements AuthenticationInt {
                 .build();
         usersRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
+        System.out.print(usersRepository.findByEmail(user.getEmail()).getAccounts());
         return AuthenticationResponse
                 .builder()
+                .idUser(usersRepository.findByEmail(user.getEmail()).getId())
                 .token(jwtToken)
                 .build();
     }
@@ -52,8 +54,10 @@ public class AuthenticateServiceImpl implements AuthenticationInt {
                 .findByEmail(request.email);
 
         var jwtToken = jwtService.generateToken(user);
+        System.out.println(jwtToken);
         return AuthenticationResponse
                 .builder()
+                .idUser(usersRepository.findByEmail(user.getEmail()).getId())
                 .token(jwtToken)
                 .build();
     }

@@ -19,7 +19,8 @@ class OnBoardContent extends StatelessWidget {
             child: Text(
               title,
               style: const TextStyle(
-                  fontSize: 56,
+                  fontFamily: "BebasNeue",
+                  fontSize: 68,
                   color: NeutralDark,
                   fontWeight: FontWeight.bold),
             ),

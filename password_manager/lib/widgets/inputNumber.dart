@@ -1,22 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:password_manager/utils/colors.dart';
 
-class Input extends StatelessWidget {
+class InputNumber extends StatelessWidget {
   final String label;
   final String placeholder;
   final Function onChange;
-  final bool isPassword;
-  final bool isEnable;
   final String defaultValue;
 
-  const Input({
+  const InputNumber({
     super.key,
     required this.label,
     required this.placeholder,
     required this.onChange,
-    this.isPassword = false,
-    this.isEnable = true,
-    this.defaultValue = "",
+    required this.defaultValue,
   });
 
   @override
@@ -32,8 +30,8 @@ class Input extends StatelessWidget {
         ),
         TextFormField(
           initialValue: defaultValue,
-          enabled: isEnable,
-          obscureText: isPassword ? true : false,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             hintText: placeholder,
             hintStyle: const TextStyle(color: NeutralGray),

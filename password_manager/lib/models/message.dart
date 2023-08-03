@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:password_manager/models/user.dart';
 
 class Message {
   final bool isError;
-  final Object? data;
+  final User? data;
   final String message;
 
   Message({

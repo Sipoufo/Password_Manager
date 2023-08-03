@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:password_manager/screens/home.dart';
 import 'package:password_manager/screens/onboarding.dart';
 import 'package:password_manager/utils/colors.dart';
+import 'package:password_manager/utils/local_storage.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -18,15 +20,34 @@ class _SplashState extends State<Splash> {
     systemNavigationBarIconBrightness: Brightness.dark,
   );
 
+  late bool _haveToken;
+
+  __haveToken() async {
+    String? token = await LocalStorage().setValue("token");
+    print(token);
+    setState(() {
+      if (token == null) {
+        _haveToken = false;
+      } else {
+        _haveToken = true;
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      __haveToken();
+    });
+
     Timer(
       const Duration(seconds: 3),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const Onboarding(),
+          builder: (context) =>
+              _haveToken ? const Onboarding() : const Onboarding(),
         ),
       ),
     );

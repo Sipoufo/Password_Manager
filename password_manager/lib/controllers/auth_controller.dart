@@ -1,21 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:http/src/response.dart';
-import 'package:password_manager/controllers/request.dart';
-import 'package:password_manager/controllers/response.dart';
 import 'package:password_manager/endpoints/auth.dart';
+import 'package:password_manager/models/token.dart';
 import 'package:password_manager/services/auth_service.dart';
 
 class AuthController {
-  final resultNotifier = ValueNotifier<RequestState>(RequestInitial());
-
-  Future<void> register(String name, String email, String password) async {
-    resultNotifier.value = RequestLoadInProgress();
+  Future<Token> register(String email, String name, String password) async {
+    print(email);
     AuthService authService = AuthService();
+    final json = {"email": email, "name": name, "password": password};
 
-    final json = '{"name": $name, "email": $email, "password": $password}';
-    ResponseData responseData = ResponseData();
+    return await authService.register(REGISTER, json);
+  }
 
-    responseData
-        .handleResponse(authService.register(REGISTER, json) as Response);
+  Future<Token> login(String email, String password) async {
+    AuthService authService = AuthService();
+    print("email $email");
+    final json = {"email": email, "password": password};
+
+    print("json $json");
+    return await authService.login(LOGIN, json);
   }
 }

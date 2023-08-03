@@ -33,18 +33,18 @@ class PasswordItemInfo extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            child: GestureDetector(
-              onTap: () {
-                Clipboard.setData(ClipboardData(text: info));
-              },
-              child: const Icon(
-                Icons.copy,
-                color: Primary,
-                size: 24,
-              ),
-            ),
-          )
+          // Container(
+          //   child: GestureDetector(
+          //     onTap: () {
+          //       Clipboard.setData(ClipboardData(text: info));
+          //     },
+          //     child: const Icon(
+          //       Icons.copy,
+          //       color: Primary,
+          //       size: 24,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
