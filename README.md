@@ -7,10 +7,10 @@
 ![](https://img.shields.io/badge/Code-MongoDB-informational?style=flat&logo=mongodb&color=4EA94B)
 
 ## Goals
-- [] Authentication with normal path
-- [] Authentication with OAuth 2.0
-- [] CRUD account
-- [] Generate password when you create or update account
-- [] Fing account
-- [] Copy account
-- [] Manage profile account
+- [x] Authentication with normal path
+- [x] Authentication with OAuth 2.0
+- [x] CRUD account
+- [x] Generate password when you create or update account
+- [x] Fing account
+- [x] Copy account
+- [x] Manage profile account
